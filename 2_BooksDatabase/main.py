@@ -25,7 +25,7 @@ def user_input(prompt):
 
 def add_book():
     name, author = user_input("Provide comma separated book name and author: ").split(',')
-    database.add(name.strip(), author.strip(), False)
+    database.add(name.strip(), author.strip())
 
 
 def list_books():
@@ -57,6 +57,8 @@ def get_choice():
 
 
 def menu():
+    database.create_book_table()
+
     choice = get_choice()
     while choice != 'q':
         #print('chose operation {}'.format(choice))
