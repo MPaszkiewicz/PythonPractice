@@ -1,14 +1,27 @@
+import re
+import logging
 from bs4 import BeautifulSoup
 from locators.books_locators import BooksLocators
 
 
+logger = logging.getLogger('scraping')
+
+
 class BooksPage:
     def __init__(self, page):
+        logger.info('Parsing page with BeautifulSoup HTML')
         self.soup = BeautifulSoup(page, 'html.parser')
 
     @property
     def books(self):
         return [BookParser(e) for e in self.soup.select(BooksLocators.BOOKS)]
+
+    @property
+    def page_count(self):
+        content = self.soup.select_one(BooksLocators.PAGER).string
+        pattern = 'Page [0-9]+ of ([0-9]+)'
+        ret = re.search(pattern, content)
+        return ret.group(1)
 
 
 class BookParser:
