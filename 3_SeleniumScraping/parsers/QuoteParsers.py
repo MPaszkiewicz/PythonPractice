@@ -1,5 +1,3 @@
-import time
-
 from locators.QuotesLocators import QuotesLocators
 
 from selenium.webdriver.common.by import By
