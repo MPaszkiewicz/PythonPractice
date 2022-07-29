@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block bodycontent %}
+    <h2>This is my movies website!</h2>
+    <ul>
+        {% for movie in movies %}
+            <li><a href="{{ url_for('movie', movie_idx=movie.id) }}">{{ movie }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('create') }}">Add new movie</a>
+{% endblock %}
